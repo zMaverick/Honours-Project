@@ -12,6 +12,8 @@ public class CameraMovement : MonoBehaviour {
 	public KeyCode[] input_Right = new KeyCode[2];
 
 	private GameObject scrollAngle;
+	public RaycastHit lastHit;
+	public string previousHit = "";
 
 	// Use this for initialization
 	void Start () 
@@ -64,6 +66,7 @@ public class CameraMovement : MonoBehaviour {
 		}
 
 		ClampCamera();
+		Raycaster();
 	}
 
 	void ClampCamera()
@@ -120,5 +123,43 @@ public class CameraMovement : MonoBehaviour {
 		}
 	}
 
+	void Raycaster()
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+		Debug.DrawRay(ray.origin, ray.direction, Color.red);
+
+		if (Physics.Raycast(ray, out hit, 100))
+		{
+			if(previousHit.Length > 0)
+			{
+				string currentHit = hit.collider.gameObject.transform.parent.name;
+				previousHit = lastHit.collider.gameObject.transform.parent.name;
+				Debug.Log(previousHit);
+				if(currentHit != previousHit)
+				{
+					hit.collider.gameObject.SendMessage("CursorHover", true);
+					lastHit.collider.gameObject.SendMessage("CursorHover", false);
+					Debug.Log("1");
+				}
+				else
+				{
+					hit.collider.gameObject.SendMessage("CursorHover", true);
+					Debug.Log("2");
+				}
+			}
+			else
+			{
+				hit.collider.gameObject.SendMessage("CursorHover", true);
+				lastHit = hit;
+				previousHit = lastHit.collider.gameObject.transform.parent.name;
+				Debug.Log("3");
+			}
+			lastHit = hit;
+			//Debug.Log(lastHit.collider.gameObject.transform.parent.name);
+
+		}
+	}
 
 }

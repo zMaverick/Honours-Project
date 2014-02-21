@@ -7,53 +7,45 @@ public class Grid : MonoBehaviour {
 	public int grid_Length;
 	public int grid_Width;
 
+	public Vector3 grid_Position;
+
 	public float spacing;
+	public GameObject[,] gridNodes;
 
-	public List<Vector3> gridList = new List<Vector3>();
-	//public Vector3[,] gridLines = new Vector3[10, 10];
-	public Vector3[,] gridLines;
-
-	Mesh mesh;
+	public GameObject gNode;
 
 	// Use this for initialization
 	void Start () 
 	{
-		gridLines = new Vector3[grid_Length, grid_Width];	//2D array of groups of Lines
+		gridNodes = new GameObject[grid_Length, grid_Width];	//2D array of groups of Nodes
 
-		for(int x = 0; x < grid_Width; x++)
+		for(int x = 0; x < gridNodes.GetLength(0); x++)
 		{
-			for(int z = 0; z < grid_Length; z++)
+			for(int z = 0; z < gridNodes.GetLength(1); z++)
 			{
-				gridList.Add(new Vector3(x * spacing, 0, z * spacing));
+				GameObject node = (GameObject)Instantiate(gNode);
+
+				node.transform.parent = this.transform;
+				node.transform.localPosition = new Vector3(x * spacing, 0f, z * spacing);
+				node.name = "Node "+x+"-"+z;
+
+				gridNodes[x,z] = node;
 			}
 		}
 
-		for(int x = 0; x < gridLines.GetLength(0); x++)
-		{
-			for(int z = 0; z < gridLines.GetLength(1); z++)
-			{
-				gridLines[x,z] = new Vector3(x * spacing, 0, z * spacing);
-				Debug.Log (gridLines[x,z]);
-			}
-		}
+		float gridLength = grid_Length * spacing;
+		float gridWidth = grid_Width * spacing;
+
+		transform.position = new Vector3(grid_Position.x +0.5f - gridLength/2, grid_Position.y, grid_Position.z +0.5f - grid_Width/2);
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		for(int x = 0; x < gridLines.GetLength(0); x++)
-		{
-			for(int z = 0; z < gridLines.GetLength(1); z++)
-			{
-				if(x == gridLines.GetLength(0) - 1)
-				{
-					return;
-				}
-				
-				Debug.DrawLine(gridLines[x, z], gridLines[x+1, z], Color.green);
-				Debug.DrawLine(gridLines[z, x], gridLines[z, x+1], Color.green);
-			}
-		}
-
+		float gridLength = grid_Length * spacing;
+		float gridWidth = grid_Width * spacing;
+		
+		transform.position = new Vector3(grid_Position.x +0.5f - gridLength/2, grid_Position.y, grid_Position.z +0.5f - grid_Width/2);
 	}
 }
