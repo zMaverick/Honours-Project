@@ -21,9 +21,15 @@ public class Turret_AI : MonoBehaviour {
 	public float scanAngle;
 
 	public GameObject head;
+	public GameObject headMain;
+	public GameObject body;
 	public GameObject gun;
+	public GameObject gunMain;
 	public GameObject spawn;
 	public GameObject bullet;
+
+	public Material defaultMaterial;
+	public Material selectMaterial;
 
 	private GameObject enemyTarget;
 
@@ -35,7 +41,7 @@ public class Turret_AI : MonoBehaviour {
 	private int fireCounter;
 	private double lastFireTime;
 	public double fireRate;
-	public GameObject muzzleFlash;
+	private GameObject muzzleFlash;
 
 	void Start () 
 	{
@@ -172,6 +178,22 @@ public class Turret_AI : MonoBehaviour {
 		if(currentTime - lastFireTime >= 5)
 		{
 			muzzleFlash.SetActive(false);
+		}
+	}
+
+	void Selected(bool isSelected)
+	{
+		if(isSelected)
+		{
+			headMain.renderer.material = selectMaterial;
+			body.renderer.material = selectMaterial;
+			gunMain.renderer.material = selectMaterial;
+		}
+		else
+		{
+			headMain.renderer.material = defaultMaterial;
+			body.renderer.material = defaultMaterial;
+			gunMain.renderer.material = defaultMaterial;
 		}
 	}
 }

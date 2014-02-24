@@ -10,7 +10,7 @@ public class Grid : MonoBehaviour {
 	public Vector3 grid_Position;
 
 	public float spacing;
-	public GameObject[,] gridNodes;
+	public static GameObject[,] gridNodes;
 
 	public GameObject gNode;
 
@@ -24,10 +24,14 @@ public class Grid : MonoBehaviour {
 			for(int z = 0; z < gridNodes.GetLength(1); z++)
 			{
 				GameObject node = (GameObject)Instantiate(gNode);
+				Tile nodeScript = node.GetComponentInChildren<Tile>();
 
 				node.transform.parent = this.transform;
 				node.transform.localPosition = new Vector3(x * spacing, 0f, z * spacing);
 				node.name = "Node "+x+"-"+z;
+
+				nodeScript.X = x;
+				nodeScript.Y = z;
 
 				gridNodes[x,z] = node;
 			}
@@ -36,7 +40,7 @@ public class Grid : MonoBehaviour {
 		float gridLength = grid_Length * spacing;
 		float gridWidth = grid_Width * spacing;
 
-		transform.position = new Vector3(grid_Position.x +0.5f - gridLength/2, grid_Position.y, grid_Position.z +0.5f - grid_Width/2);
+		transform.position = new Vector3(grid_Position.x + spacing/2 - gridLength/2, grid_Position.y, grid_Position.z + spacing/2 - gridWidth/2);
 
 	}
 	
@@ -46,6 +50,6 @@ public class Grid : MonoBehaviour {
 		float gridLength = grid_Length * spacing;
 		float gridWidth = grid_Width * spacing;
 		
-		transform.position = new Vector3(grid_Position.x +0.5f - gridLength/2, grid_Position.y, grid_Position.z +0.5f - grid_Width/2);
+		transform.position = new Vector3(grid_Position.x + spacing/2 - gridLength/2, grid_Position.y, grid_Position.z + spacing/2 - gridWidth/2);
 	}
 }

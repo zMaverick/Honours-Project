@@ -137,6 +137,7 @@
      <Compile Include="Assets\Standard Assets\Gavin&apos;s Assets\Scripts\Turret_AI.cs" />
      <Compile Include="Assets\Standard Assets\Gavin&apos;s Assets\Scripts\Turret_Bullet.cs" />
      <Compile Include="Assets\Standard Assets\Gavin&apos;s Assets\Scripts\World.cs" />
+     <Compile Include="Assets\Standard Assets\Gavin&apos;s Assets\Scripts\_GUI.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\ActivateTrigger.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
