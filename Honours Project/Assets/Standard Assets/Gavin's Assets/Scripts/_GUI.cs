@@ -10,15 +10,20 @@ public class _GUI : MonoBehaviour {
 
 	private float screenHeight;
 	private float screenWidth;
-	private GameObject selectedTile;
+	private GameObject objectOver;
 	private RaycastHit lastHit;
 	private string previousHit = "";
 	private bool unitSpawned = false;
 
+	private GameObject unitOver;
+	private GameObject lastUnitOver;
+
+	private Tile tileOver;
 	// Use this for initialization
 	void Start() 
 	{
-		selectedTile = new GameObject();
+		objectOver = new GameObject();
+		lastUnitOver = new GameObject();
 
 		screenHeight = Screen.height;
 		screenWidth = Screen.width;
@@ -27,16 +32,61 @@ public class _GUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		//Debug.Log (objectOver.name);
 		if (unitSpawned)
 		{
-			spawnedUnit.transform.position = new Vector3 (selectedTile.transform.position.x, 0.8f ,selectedTile.transform.position.z);
+			if(objectOver.transform.name == "tile_Main")
+			{
+				tileOver = objectOver.GetComponent<Tile>();
 
+				if(tileOver.Occupied == false)
+				{
+					spawnedUnit.transform.position = new Vector3 (objectOver.transform.position.x, 0.8f ,objectOver.transform.position.z);
 
-			if(Input.GetMouseButton(1))
-		   	{
-				spawnedUnit.SendMessage ("Selected", false);
-				unitSpawned = false;
+					if(Input.GetMouseButton(1))
+				   	{
+						spawnedUnit.SendMessage ("Spawned", false);
+						tileOver.Occupied = true;
+						tileOver.Occupier = spawnedUnit;
+						unitSpawned = false;
+					}
+				}
+				Debug.Log (objectOver.name);
 			}
+			else if(objectOver == spawnedUnit)
+			{
+				if(tileOver.Occupied == false)
+				{
+					if(Input.GetMouseButton(1))
+					{
+						spawnedUnit.SendMessage ("Spawned", false);
+						tileOver.Occupied = true;
+						tileOver.Occupier = spawnedUnit;
+						unitSpawned = false;
+					}
+				}
+			}
+		}
+
+		if(Input.GetMouseButton(0))
+		{
+			if(unitOver != lastUnitOver)
+			{
+				unitOver.SendMessage("Selected", true);
+				lastUnitOver.SendMessage("Selected", false);
+			}
+			else if(unitOver == lastUnitOver)
+			{
+				if(unitOver == objectOver)
+				{
+					unitOver.SendMessage("Selected", true);
+				}
+				else
+				{
+					unitOver.SendMessage("Selected", false);
+				}
+			}
+			lastUnitOver = unitOver;
 		}
 
 		Raycaster();
@@ -45,7 +95,7 @@ public class _GUI : MonoBehaviour {
 	void OnGUI() 
 	{
 
-		if(GUI.Button(new Rect(screenWidth/2, screenHeight - (10+50), 50, 50), unitTexture))
+		if(GUI.Button(new Rect(screenWidth/2, screenHeight - (10+50), 50, 50), "1"))
 		{
 			if(!unitSpawned)
 			{
@@ -59,7 +109,7 @@ public class _GUI : MonoBehaviour {
 		if (unit == 1)
 		{
 			spawnedUnit = (GameObject)Instantiate(unit1);
-			spawnedUnit.SendMessage ("Selected", true);
+			spawnedUnit.SendMessage ("Spawned", true);
 		}
 
 		unitSpawned = true;
@@ -74,9 +124,26 @@ public class _GUI : MonoBehaviour {
 		{
 			if(previousHit.Length > 0)
 			{
-				string currentHit = hit.collider.gameObject.transform.parent.name;
-				previousHit = lastHit.collider.gameObject.transform.parent.name;
-				
+				string currentHit;
+
+				if(hit.collider.gameObject.transform.parent != null)
+				{
+					currentHit = hit.collider.gameObject.transform.parent.name;
+				}
+				else
+				{
+					currentHit = hit.collider.gameObject.transform.name;
+				}
+
+				if(lastHit.collider.gameObject.transform.parent != null)
+				{
+					previousHit = lastHit.collider.gameObject.transform.parent.name;
+				}
+				else
+				{
+					previousHit = lastHit.collider.gameObject.transform.name;
+				}
+
 				if(currentHit != previousHit)
 				{
 					hit.collider.gameObject.SendMessage("CursorHover", true);
@@ -94,7 +161,7 @@ public class _GUI : MonoBehaviour {
 				previousHit = lastHit.collider.gameObject.transform.parent.name;
 			}
 			lastHit = hit;
-			selectedTile = hit.collider.gameObject;
+			objectOver = hit.collider.gameObject;
 		}
 		else
 		{
@@ -108,6 +175,12 @@ public class _GUI : MonoBehaviour {
 			}
 		}
 	}
+
+	void Selector(GameObject selected)
+	{
+		unitOver = selected;
+	}
+
 
 
 }

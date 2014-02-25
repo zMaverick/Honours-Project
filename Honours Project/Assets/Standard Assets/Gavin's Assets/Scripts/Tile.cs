@@ -5,8 +5,9 @@ public class Tile : MonoBehaviour
 {
 	private float x;
 	private float y;
+	private bool occupied;
+	private GameObject occupier;
 
-	public GameObject[] neighbours = new GameObject[8];
 
 	public float X
 	{
@@ -20,6 +21,58 @@ public class Tile : MonoBehaviour
 		set{ y = value; }
 	}
 
+	public bool Occupied
+	{
+		get { return occupied; }
+		set { occupied = value; }
+	}
+
+	public GameObject Occupier
+	{
+		get { return occupier; }
+		set { occupier = value; }
+	}
+
+#region Neighbours
+
+	public GameObject[] neighbours = new GameObject[8];
+
+	public GameObject Bottom_Left
+	{
+		get { return neighbours[0]; }
+	}
+	public GameObject Left
+	{
+		get { return neighbours[1]; }
+	}
+	public GameObject Top_Left
+	{
+		get { return neighbours[2]; }
+	}
+
+	public GameObject Bottom
+	{
+		get { return neighbours[3]; }
+	}
+	public GameObject Top
+	{
+		get { return neighbours[4]; }
+	}
+
+	public GameObject Bottom_Right
+	{
+		get { return neighbours[5]; }
+	}
+	public GameObject Right
+	{
+		get { return neighbours[6]; }
+	}
+	public GameObject Top_Right
+	{
+		get { return neighbours[7]; }
+	}
+#endregion
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -32,7 +85,11 @@ public class Tile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if(occupied)
+		{
+			occupier.name = "Turret ("+x+"-"+y+")";
+			renderer.material.color = new Vector4(0.776f, 0f, 0f, 0.212f);
+		}
 	}
 	
 	private GameObject FindNeighbors(int number)
@@ -91,8 +148,14 @@ public class Tile : MonoBehaviour
 		
 	}
 
+	void Selected(bool selected)
+	{
+		gameObject.renderer.enabled = selected;
+	}
+
 	void CursorHover(bool selected)
 	{
+		//GameObject.Find ("GUI").SendMessage("Selector", this.gameObject);
 		gameObject.renderer.enabled = selected;
 
 		/*

@@ -5,6 +5,7 @@ public class Turret_AI : MonoBehaviour {
 
 	public enum TurretState
 	{
+		SPAWN,
 		STOP,
 		IDLE,
 		ATTACK,
@@ -42,47 +43,47 @@ public class Turret_AI : MonoBehaviour {
 	private double lastFireTime;
 	public double fireRate;
 	private GameObject muzzleFlash;
+	private bool turretActive = false;
 
-	void Start () 
+	void Start() 
 	{
-		currentState = TurretState.STOP;
+		currentState = TurretState.SPAWN;
 		turretReset = false;
 		muzzleFlash = transform.FindChild("turret_Head/turret_Gun/turret_Gun_MuzzleFlash").gameObject;
+		muzzleFlash.SetActive(false);
 		baseRotation = head.transform.localRotation;
 	}
 	
 
-	void Update () 
+	void Update() 
 	{
-		switch(currentState)
+
+		if(turretActive)
 		{
-			case TurretState.STOP:
+			switch(currentState)
 			{
-				ResetTurret();
-				
-				break;
-			}
-			case TurretState.IDLE:
-			{
-				Scan ();
-				
-				if(Input.GetKeyDown(KeyCode.Return))
+				case TurretState.SPAWN:
 				{
-					currentState = TurretState.ATTACK;
+					break;
 				}
-
-				break;
-			}
-			case TurretState.ATTACK:
-			{
-				Attack ();
-
-				if(Input.GetKeyDown(KeyCode.Return))
+				case TurretState.STOP:
 				{
-					currentState = TurretState.STOP;
+					ResetTurret();
+					
+					break;
 				}
+				case TurretState.IDLE:
+				{
+					Scan ();
+					
+					break;
+				}
+				case TurretState.ATTACK:
+				{
+					Attack ();
 
-				break;
+					break;
+				}
 			}
 		}
 	}
@@ -155,14 +156,11 @@ public class Turret_AI : MonoBehaviour {
 
 		Fire();
 	}
-
-
-
+	
 	void Target(GameObject target)
 	{
 		currentState = TurretState.ATTACK;
 		enemyTarget = target;
-
 	}
 
 	void Fire()
@@ -181,6 +179,22 @@ public class Turret_AI : MonoBehaviour {
 		}
 	}
 
+	void Spawned(bool isSpawned)
+	{
+		if(isSpawned)
+		{
+			Selected(isSpawned);
+			currentState = TurretState.SPAWN;
+			turretActive = false;
+		}
+		else
+		{
+			Selected(isSpawned);
+			currentState = TurretState.STOP;
+			turretActive = true;
+		}
+	}
+
 	void Selected(bool isSelected)
 	{
 		if(isSelected)
@@ -196,4 +210,14 @@ public class Turret_AI : MonoBehaviour {
 			gunMain.renderer.material = defaultMaterial;
 		}
 	}
+
+	void CursorHover(bool mouseHover)
+	{
+		if(turretActive)
+		{
+			GameObject.Find ("GUI").SendMessage("Selector", this.gameObject);
+		}
+
+	}
+
 }

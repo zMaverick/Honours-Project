@@ -29,7 +29,7 @@ public class Turret_Bullet : MonoBehaviour
 	{
 		if(collider.name == "Enemy")
 		{
-			collider.gameObject.SendMessage ("Damage", gameObject);
+			collider.gameObject.SendMessage ("Damage", "Turret");
 			Destroy (gameObject);
 		}
 	}
