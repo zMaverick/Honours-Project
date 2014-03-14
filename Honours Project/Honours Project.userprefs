@@ -1,10 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Gavin's Assets\Scripts\Login\Connector.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Desktop\Projects\Photon-Test\Assets\readme.txt">
     <Files>
-      <File FileName="Assets\Lobby\Scripts\LoginGUI.cs" Line="8" Column="22" />
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Login\Connector.cs" Line="114" Column="3" />
-      <File FileName="Assets\Lobby\Scripts\SmartFoxConnection.cs" Line="33" Column="2" />
+      <File FileName="..\..\..\..\Desktop\Projects\Photon-Test\Assets\readme.txt" Line="24" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

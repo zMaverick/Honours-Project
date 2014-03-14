@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using Sfs2X;
 
 // Statics for holding the connection to the SFS server end
@@ -36,4 +36,4 @@ public class SmartFoxConnection : MonoBehaviour
             smartFox.Disconnect();
         }
     } 
-}
+}*/

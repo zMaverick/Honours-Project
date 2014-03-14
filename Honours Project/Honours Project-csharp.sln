@@ -5,6 +5,8 @@ Project("{00AE6405-2733-0C38-D7F5-81D6865DBE3C}") = "Honours Project", "Assembly
 EndProject
 Project("{00AE6405-2733-0C38-D7F5-81D6865DBE3C}") = "Honours Project", "Assembly-CSharp-vs.csproj", "{0E8EDAA8-0AC2-CAF1-48E0-F9A934FF73BA}"
 EndProject
+Project("{00AE6405-2733-0C38-D7F5-81D6865DBE3C}") = "Honours Project", "Assembly-CSharp-Editor-vs.csproj", "{628DAB48-1D03-B080-FF02-65CB9D626A40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{0E8EDAA8-0AC2-CAF1-48E0-F9A934FF73BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E8EDAA8-0AC2-CAF1-48E0-F9A934FF73BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E8EDAA8-0AC2-CAF1-48E0-F9A934FF73BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628DAB48-1D03-B080-FF02-65CB9D626A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628DAB48-1D03-B080-FF02-65CB9D626A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628DAB48-1D03-B080-FF02-65CB9D626A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628DAB48-1D03-B080-FF02-65CB9D626A40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																						GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																												GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
