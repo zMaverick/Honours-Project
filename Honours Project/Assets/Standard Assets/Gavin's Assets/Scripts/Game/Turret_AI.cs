@@ -13,6 +13,7 @@ public class Turret_AI : MonoBehaviour {
 
 	private Quaternion defaultHeadRotation = Quaternion.identity;
 	private Quaternion defaultGunRotation = Quaternion.identity;
+	private Quaternion headForward;
 
 	private bool turretReset;
 
@@ -92,14 +93,14 @@ public class Turret_AI : MonoBehaviour {
 	void ResetTurret()
 	{
 
-		head.transform.rotation = Quaternion.RotateTowards(head.transform.rotation, defaultHeadRotation, 100.0f*Time.deltaTime);
+		head.transform.localRotation = Quaternion.RotateTowards(head.transform.localRotation, defaultHeadRotation, 100.0f*Time.deltaTime);
 		gun.transform.localRotation = Quaternion.RotateTowards(gun.transform.localRotation, defaultGunRotation, 100.0f*Time.deltaTime);
 
-		if((head.transform.rotation == defaultHeadRotation) && (gun.transform.rotation == defaultGunRotation))
+		if((head.transform.localRotation == defaultHeadRotation) && (gun.transform.localRotation == defaultGunRotation))
 		{
 			currentState = TurretState.IDLE;
 		}
-		else
+		else 
 		{
 			currentState = TurretState.STOP;
 		}
@@ -119,11 +120,20 @@ public class Turret_AI : MonoBehaviour {
 	{
 		bool headLocked;
 		bool gunLocked;
+		Vector3 gunTarget;
+		Vector3 headTarget;
 
-		Vector3 gunTarget = enemyTarget.transform.position - gun.transform.position;
-		Vector3 headTarget = enemyTarget.transform.position - head.transform.position;
-		gunTarget.x = 0;
-		headTarget.y = 0;
+		try
+		{
+			gunTarget = enemyTarget.transform.position - gun.transform.position;
+			headTarget = enemyTarget.transform.position - head.transform.position;
+			gunTarget.x = 0;
+			headTarget.y = 0;
+		}
+		catch
+		{
+			return;
+		}
 
 		Quaternion gunLook = Quaternion.LookRotation (gunTarget);
 		Quaternion headLook = Quaternion.LookRotation (headTarget);
@@ -139,10 +149,10 @@ public class Turret_AI : MonoBehaviour {
 			gunLocked = false;
 		}
 
-		if(Quaternion.Angle (headLook, Quaternion.identity) <= scanAngle/2) 
+		if(Quaternion.Angle (headLook, headForward) <= scanAngle/2) 
 		{
 			headLocked = true;
-			head.transform.localRotation = headLook;
+			head.transform.rotation = headLook;
 		}
 		else
 		{
@@ -201,6 +211,7 @@ public class Turret_AI : MonoBehaviour {
 		{
 			Selected(isSpawned);
 			currentState = TurretState.STOP;
+			headForward = head.transform.rotation;
 			turretActive = true;
 		}
 	}

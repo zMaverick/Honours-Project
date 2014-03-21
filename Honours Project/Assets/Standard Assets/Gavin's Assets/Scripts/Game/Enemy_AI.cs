@@ -5,7 +5,9 @@ public class Enemy_AI : MonoBehaviour
 {
 	public GameObject turretBullet;
 	private int health = 100;
-
+	public GameObject body;
+	public Material defaultMaterial;
+	public Material selectMaterial;
 
 	public int Health
 	{
@@ -33,8 +35,24 @@ public class Enemy_AI : MonoBehaviour
 	{
 		if(damager == "Turret")
 		{
-			Debug.Log (health);
 			health = health - 1;
 		}
+	}
+
+	void Selected(bool isSelected)
+	{
+		if(isSelected)
+		{
+			body.renderer.material = selectMaterial;
+		}
+		else
+		{
+			body.renderer.material = defaultMaterial;
+		}
+	}
+	
+	void CursorHover(bool mouseHover)
+	{
+		GameObject.Find ("GUI").SendMessage("Select", this.gameObject);
 	}
 }

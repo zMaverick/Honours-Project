@@ -33,4 +33,8 @@ public class Turret_Bullet : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
+	void CursorHover(bool selected)
+	{
+		return;
+	}
 }

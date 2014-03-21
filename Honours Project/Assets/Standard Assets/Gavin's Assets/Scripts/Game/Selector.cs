@@ -12,15 +12,22 @@ public class Selector : MonoBehaviour
 	private GameObject unitOver;
 	private GameObject lastSelected;
 	private _GUI gui;
+	private bool unit_Selected = false;
 
 	public GameObject MouseOverObject
 	{
 		get { return objectOver; }
+		set { objectOver = value; }
 	}
 
 	public GameObject UnitSelected
 	{
 		get { return unitSelected; }
+	}
+
+	public bool Unit_Selected
+	{
+		get { return unit_Selected; }
 	}
 
 	void Start() 
@@ -36,7 +43,7 @@ public class Selector : MonoBehaviour
 	{
 		if (unitOver != null && !gui.UnitSpawning)
 		{
-			if(Input.GetMouseButton(0))
+			if(Input.GetMouseButtonDown(0))
 			{
 				unitSelected = unitOver;
 				UnitSelection();
@@ -58,6 +65,7 @@ public class Selector : MonoBehaviour
 			if(previousHit.Length > 0)
 			{
 				string currentHit;
+
 				if(hit.collider.gameObject.transform.parent != null)
 				{
 					currentHit = hit.collider.gameObject.transform.parent.name;
@@ -66,15 +74,24 @@ public class Selector : MonoBehaviour
 				{
 					currentHit = hit.collider.gameObject.transform.name;
 				}
-				
-				if(lastHit.collider.gameObject.transform.parent != null)
+
+				if(lastHit.collider != null)
 				{
-					previousHit = lastHit.collider.gameObject.transform.parent.name;
+					if(lastHit.collider.gameObject.transform.parent != null)
+					{
+						previousHit = lastHit.collider.gameObject.transform.parent.name;
+					}
+					else
+					{
+						previousHit = lastHit.collider.gameObject.transform.name;
+					}
 				}
 				else
 				{
-					previousHit = lastHit.collider.gameObject.transform.name;
+					previousHit = "DestroyedObject";
+					lastHit = hit;
 				}
+	
 
 				if(currentHit != previousHit)
 				{
@@ -111,20 +128,31 @@ public class Selector : MonoBehaviour
 
 	void UnitSelection()
 	{
-		if(unitSelected != lastSelected)
+		if(lastSelected == null)
 		{
 			unitSelected.SendMessageUpwards("Selected", true);
-			lastSelected.SendMessageUpwards("Selected", false);
+			unit_Selected = true;
 		}
-		else if(unitSelected == lastSelected)
+		else
 		{
-			if(unitSelected == objectOver)
+			if(unitSelected != lastSelected)
 			{
 				unitSelected.SendMessageUpwards("Selected", true);
+				lastSelected.SendMessageUpwards("Selected", false);
+				unit_Selected = true;
 			}
-			else
+			else if(unitSelected == lastSelected)
 			{
-				unitSelected.SendMessageUpwards("Selected", false);
+				if(unitSelected == objectOver)
+				{
+					unitSelected.SendMessageUpwards("Selected", true);
+					unit_Selected = true;
+				}
+				else
+				{
+					unitSelected.SendMessageUpwards("Selected", false);
+					unit_Selected = false;
+				}
 			}
 		}
 		lastSelected = unitSelected;
@@ -134,5 +162,4 @@ public class Selector : MonoBehaviour
 	{
 		unitOver = selected;
 	}
-
 }

@@ -1,8 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\Desktop\Projects\Photon-Test\Assets\readme.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Standard Assets\Gavin's Assets\Scripts\Game\_GUI.cs">
     <Files>
-      <File FileName="..\..\..\..\Desktop\Projects\Photon-Test\Assets\readme.txt" Line="24" Column="26" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\_GUI.cs" Line="132" Column="68" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Enemy_AI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_AI.cs" Line="155" Column="27" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Selector.cs" Line="18" Column="3" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Tile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_Bullet.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
