@@ -11,6 +11,7 @@ public class Block_AI : MonoBehaviour {
 	public Material defaultMaterial;
 
 	private bool blockActive = false;
+	public GameObject tileObject;
 
 	void Spawned(bool isSpawned)
 	{
@@ -48,6 +49,20 @@ public class Block_AI : MonoBehaviour {
 		if(blockActive)
 		{
 			GameObject.Find ("GUI").SendMessage("Select", this.gameObject);
+		}
+	}
+
+	void TileOver(GameObject tileOn)
+	{
+		tileObject = tileOn;
+	}
+
+	public void Destroy(bool ifSpawned)
+	{
+		if(ifSpawned)
+		{
+			Debug.Log(tileObject.name);
+			tileObject.BroadcastMessage("Deleted");
 		}
 	}
 }

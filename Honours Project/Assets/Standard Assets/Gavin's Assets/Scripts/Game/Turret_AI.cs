@@ -45,6 +45,7 @@ public class Turret_AI : MonoBehaviour {
 	public double fireRate;
 	private GameObject muzzleFlash;
 	private bool turretActive = false;
+	public GameObject tileObject;
 
 	void Start() 
 	{
@@ -214,6 +215,12 @@ public class Turret_AI : MonoBehaviour {
 			headForward = head.transform.rotation;
 			turretActive = true;
 		}
+
+
+	}
+	void TileOver(GameObject tileOn)
+	{
+		tileObject = tileOn;
 	}
 
 	void Selected(bool isSelected)
@@ -240,4 +247,11 @@ public class Turret_AI : MonoBehaviour {
 		}
 	}
 
+	public void Destroy(bool ifSpawned)
+	{
+		if(ifSpawned)
+		{
+			tileObject.BroadcastMessage("Deleted");
+		}
+	}
 }

@@ -8,6 +8,9 @@ public class Tile : MonoBehaviour
 	private bool occupied;
 	private GameObject occupier;
 
+	public Color defaultColour;
+	public Color occupiedColour = new Color(0.776f, 0f, 0f, 0.212f);
+
 	public float X
 	{
 		get{ return x; }
@@ -81,14 +84,12 @@ public class Tile : MonoBehaviour
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	public void OccupyingUnit (GameObject occupierObject) 
 	{
-		if(occupied)
-		{
-			occupier.name = occupier.tag+" ("+x+"-"+y+")";
-			renderer.material.color = new Vector4(0.776f, 0f, 0f, 0.212f);
-		}
+		occupied = true;
+		occupier = occupierObject;
+		occupier.name = occupier.tag+" ("+x+"-"+y+")";
+		renderer.material.color = occupiedColour;
 	}
 	
 	private GameObject FindNeighbors(int number)
@@ -177,5 +178,12 @@ public class Tile : MonoBehaviour
 			}
 		}
 		*/
+	}
+
+	void Deleted()
+	{
+		occupied = false;
+		occupier = null;
+		renderer.material.color = defaultColour;
 	}
 }

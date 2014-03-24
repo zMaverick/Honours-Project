@@ -12,13 +12,14 @@ public class _GUI : MonoBehaviour {
 
 	private float screenHeight;
 	private float screenWidth;
+	private float header;
 
-	public Transform buttonHolderLeft;
-	public Transform buttonHolderMiddle;
-	public Transform buttonHolderRight;
+	public GUI_Placement buttonHolderLeft;
+	public GUI_Placement buttonHolderMiddle;
+	public GUI_Placement buttonHolderRight;
 
-	public float unitButtonHeight;
-	public float unitButtonWidth;
+	private float unitButtonHeight;
+	private float unitButtonWidth;
 
 	public float unitActionHeight;
 	public float unitActionWidth;
@@ -26,6 +27,7 @@ public class _GUI : MonoBehaviour {
 	private bool unitSpawned = false;
 	private Selector selector;
 	private Tile tileOver;
+	private string cancelText = "Cancel";
 
 	public bool UnitSpawning
 	{
@@ -53,9 +55,9 @@ public class _GUI : MonoBehaviour {
 
 					if(Input.GetMouseButtonDown(1))
 				   	{
+						spawnedUnit.SendMessage ("TileOver", tileOver.gameObject);
 						spawnedUnit.SendMessage ("Spawned", false);
-						tileOver.Occupied = true;
-						tileOver.Occupier = spawnedUnit;
+						tileOver.OccupyingUnit(spawnedUnit);
 						unitSpawned = false;
 					}
 				}
@@ -66,9 +68,9 @@ public class _GUI : MonoBehaviour {
 				{
 					if(Input.GetMouseButtonDown(1))
 					{
+						spawnedUnit.SendMessage ("TileOver", tileOver.gameObject.transform.parent.gameObject);
 						spawnedUnit.SendMessage ("Spawned", false);
-						tileOver.Occupied = true;
-						tileOver.Occupier = spawnedUnit;
+						tileOver.OccupyingUnit(spawnedUnit);
 						unitSpawned = false;
 					}
 				}
@@ -84,24 +86,13 @@ public class _GUI : MonoBehaviour {
 	void OnGUI() 
 	{
 		bool unitButtonsActive;
-		/*
-		 * 
-		private float screenHeight;
-		private float screenWidth;
-		
-		public GameObject buttonHolderLeft;
-		public GameObject buttonHolderMiddle;
-		public GameObject buttonHolderRight;
+		header = buttonHolderRight.Border;
 
-		*/
+		unitButtonWidth = (buttonHolderRight.InnerWidth/2)- (buttonHolderRight.Border/2);
+		unitButtonHeight = buttonHolderRight.InnerHeight - header;
 
-		Vector2 bhLeftCentre = new Vector2((buttonHolderLeft.position.x * screenWidth), 
-		                                   (screenHeight - (buttonHolderLeft.position.y * screenHeight)));
-		Vector2 bhMiddleCentre = new Vector2((buttonHolderMiddle.position.x * screenWidth), 
-		                                     (screenHeight - (buttonHolderMiddle.position.y * screenHeight)));
-		Vector2 bhRightCentre = new Vector2((buttonHolderRight.position.x * screenWidth), 
-		                                    (screenHeight - (buttonHolderRight.position.y * screenHeight)));
-
+		unitActionHeight = ((buttonHolderRight.InnerHeight) - ((buttonHolderLeft.Border/2) + header))/2;
+		unitActionWidth = ((buttonHolderRight.InnerHeight) - ((buttonHolderLeft.Border/2) + header));
 
 		if(unitSpawned || selector.Unit_Selected)
 		{
@@ -112,14 +103,14 @@ public class _GUI : MonoBehaviour {
 			unitButtonsActive = false;
 		}
 
-		if(GUI.Button(new Rect(screenWidth/2 -30, screenHeight - (50+50), unitButtonWidth, unitButtonHeight), "Turret"))
+		if(GUI.Button(new Rect(buttonHolderRight.LeftPosition, buttonHolderRight.TopPosition + header, unitButtonWidth, unitButtonHeight), "Turret"))
 		{
 			if(!unitSpawned)
 			{
 				SpawnUnit(1);
 			}
 		}
-		if(GUI.Button(new Rect(screenWidth/2 + 30, screenHeight - (50+50), unitButtonWidth, unitButtonHeight), "Block"))
+		if(GUI.Button(new Rect(buttonHolderRight.RightPosition - ((buttonHolderRight.InnerWidth/2) - (buttonHolderRight.Border/2)), buttonHolderRight.TopPosition + header, unitButtonWidth, unitButtonHeight), "Block"))
 		{
 			if(!unitSpawned)
 			{
@@ -129,7 +120,7 @@ public class _GUI : MonoBehaviour {
 
 		GUI.enabled = unitButtonsActive;
 
-		if(GUI.Button(new Rect((bhLeftCentre.x - (unitActionWidth/2) - 55), bhLeftCentre.y - (unitActionHeight/2), unitActionWidth, unitActionHeight), "Rotate"))
+		if(GUI.Button(new Rect((buttonHolderLeft.RightPosition - unitActionWidth), buttonHolderLeft.TopPosition + header, unitActionWidth, unitActionHeight), "Rotate"))
 		{
 			if(unitSpawned)
 			{
@@ -137,16 +128,20 @@ public class _GUI : MonoBehaviour {
 			}
 		}
 
-		if(GUI.Button(new Rect((bhLeftCentre.x - (unitActionWidth/2) + 55), bhLeftCentre.y - (unitActionHeight/2), unitActionWidth, unitActionHeight), "Cancel"))
+		if(GUI.Button(new Rect((buttonHolderLeft.RightPosition - unitActionWidth), buttonHolderLeft.BottomPosition - unitActionHeight, unitActionWidth, unitActionHeight), cancelText))
 		{
 			if(unitSpawned)
 			{
+				spawnedUnit.SendMessage("Destroy", false);
 				Destroy(spawnedUnit);
 				unitSpawned = false;
 			}
+			else if(selector.Unit_Selected)
+			{
+				selector.UnitSelected.SendMessage("Destroy", true);
+				Destroy(selector.UnitSelected);
+			}
 		}
-
-
 	}
 
 	void SpawnUnit(int unit)
@@ -172,8 +167,9 @@ public class _GUI : MonoBehaviour {
 			{
 				spawnRotation *= Quaternion.Euler(new Vector3(0f,90f,0f));
 			}
-			if(Input.GetKeyDown(KeyCode.Escape))
+			if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Delete))
 			{
+				spawnedUnit.SendMessage("Destroy", false);
 				Destroy(spawnedUnit);
 				unitSpawned = false;
 			}
@@ -188,6 +184,21 @@ public class _GUI : MonoBehaviour {
 			{
 				SpawnUnit(2);
 			}
+		}
+
+		if(selector.Unit_Selected)
+		{
+			if(Input.GetKeyDown(KeyCode.Delete))
+			{
+				selector.UnitSelected.SendMessage("Destroy", true);
+				Destroy(selector.UnitSelected);
+			}
+
+			cancelText = "Delete";
+		}
+		else
+		{
+			cancelText = "Cancel";
 		}
 
 	}

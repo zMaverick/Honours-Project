@@ -8,11 +8,12 @@ public class Selector : MonoBehaviour
 	private RaycastHit lastHit;
 	public string previousHit = "";
 
-	private GameObject unitSelected;
-	private GameObject unitOver;
-	private GameObject lastSelected;
+	public GameObject unitSelected;
+	public GameObject unitOver;
+	public GameObject lastSelected;
+	public bool unitHovering;
 	private _GUI gui;
-	private bool unit_Selected = false;
+	public bool unit_Selected = false;
 
 	public GameObject MouseOverObject
 	{
@@ -33,7 +34,7 @@ public class Selector : MonoBehaviour
 	void Start() 
 	{
 		objectOver = new GameObject();
-		lastSelected = new GameObject();
+		//lastSelected = new GameObject();
 
 		gui = this.GetComponent<_GUI>();
 
@@ -45,10 +46,13 @@ public class Selector : MonoBehaviour
 		{
 			if(Input.GetMouseButtonDown(0))
 			{
+
 				unitSelected = unitOver;
 				UnitSelection();
 			}
 		}
+
+		unitHovering = false;
 
 		Raycaster();
 	}
@@ -130,27 +134,32 @@ public class Selector : MonoBehaviour
 	{
 		if(lastSelected == null)
 		{
+			Debug.Log ("First Object Selected?");
 			unitSelected.SendMessageUpwards("Selected", true);
 			unit_Selected = true;
 		}
 		else
 		{
-			if(unitSelected != lastSelected)
+			if(unitSelected != lastSelected && unitHovering)
 			{
+				Debug.Log ("Different Object Selected");
 				unitSelected.SendMessageUpwards("Selected", true);
-				lastSelected.SendMessageUpwards("Selected", false);
+				lastSelected.SendMessageUpwards("Selected", false, SendMessageOptions.DontRequireReceiver);
 				unit_Selected = true;
 			}
 			else if(unitSelected == lastSelected)
 			{
 				if(unitSelected == objectOver)
 				{
+					Debug.Log ("Same Object Selected");
 					unitSelected.SendMessageUpwards("Selected", true);
 					unit_Selected = true;
 				}
 				else
 				{
+					Debug.Log ("No Object Selected");
 					unitSelected.SendMessageUpwards("Selected", false);
+
 					unit_Selected = false;
 				}
 			}
@@ -161,5 +170,7 @@ public class Selector : MonoBehaviour
 	void Select(GameObject selected)
 	{
 		unitOver = selected;
+		unitHovering = true;
+		Debug.Log ("TEST");
 	}
 }
