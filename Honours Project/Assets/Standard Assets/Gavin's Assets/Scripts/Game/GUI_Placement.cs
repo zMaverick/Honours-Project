@@ -15,6 +15,8 @@ public class GUI_Placement : MonoBehaviour {
 	private float innerHeight;
 	private float innerWidth;
 
+	public bool withBorder = true;
+
 	private float border;
 
 	public float CenterX
@@ -79,7 +81,14 @@ public class GUI_Placement : MonoBehaviour {
 		width = transform.lossyScale.x * screenWidth;
 		height = transform.lossyScale.y * screenHeight;
 
-		border = width * 0.05f;
+		if(withBorder)
+		{
+			border = width * 0.05f;
+		}
+		else
+		{
+			border = 0f;
+		}
 
 		centreX = (transform.position.x * screenWidth);
 		centreY = (screenHeight - (transform.position.y * screenHeight));

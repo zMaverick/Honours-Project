@@ -47,6 +47,26 @@ public class Turret_AI : MonoBehaviour {
 	private bool turretActive = false;
 	public GameObject tileObject;
 
+	private float locationX;
+	private float locationY;
+
+	private int kills = 4;
+	
+	public int Kills
+	{
+		get{ return kills; }
+	}
+
+	public float X
+	{
+		get{ return locationX; }
+	}
+
+	public float Y
+	{
+		get{ return locationY; }
+	}
+
 	void Start() 
 	{
 		currentState = TurretState.SPAWN;
@@ -221,6 +241,8 @@ public class Turret_AI : MonoBehaviour {
 	void TileOver(GameObject tileOn)
 	{
 		tileObject = tileOn;
+		locationX = tileObject.GetComponent<Tile>().X;
+		locationY = tileObject.GetComponent<Tile>().X;
 	}
 
 	void Selected(bool isSelected)

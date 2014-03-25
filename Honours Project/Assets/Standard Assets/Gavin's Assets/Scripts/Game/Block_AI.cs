@@ -13,6 +13,19 @@ public class Block_AI : MonoBehaviour {
 	private bool blockActive = false;
 	public GameObject tileObject;
 
+	private float locationX;
+	private float locationY;
+	
+	public float X
+	{
+		get{ return locationX; }
+	}
+	
+	public float Y
+	{
+		get{ return locationY; }
+	}
+
 	void Spawned(bool isSpawned)
 	{
 		if(isSpawned)
@@ -55,6 +68,8 @@ public class Block_AI : MonoBehaviour {
 	void TileOver(GameObject tileOn)
 	{
 		tileObject = tileOn;
+		locationX = tileObject.GetComponent<Tile>().X;
+		locationY = tileObject.GetComponent<Tile>().X;
 	}
 
 	public void Destroy(bool ifSpawned)

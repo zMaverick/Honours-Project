@@ -14,6 +14,9 @@ public class Selector : MonoBehaviour
 	public bool unitHovering;
 	private _GUI gui;
 	public bool unit_Selected = false;
+	public GUI_Placement mainBackground;
+	public GUI_Placement mapBackground;
+	public bool overGUI = false;
 
 	public GameObject MouseOverObject
 	{
@@ -42,18 +45,36 @@ public class Selector : MonoBehaviour
 
 	void Update()
 	{
-		if (unitOver != null && !gui.UnitSpawning)
+		if(!overGUI)
 		{
-			if(Input.GetMouseButtonDown(0))
+			if (unitOver != null && !gui.UnitSpawning)
 			{
-
-				unitSelected = unitOver;
-				UnitSelection();
+				if(Input.GetMouseButtonDown(0))
+				{
+					unitSelected = unitOver;
+					UnitSelection();
+				}
 			}
 		}
 
 		unitHovering = false;
+	}
 
+	void LateUpdate()
+	{
+		Rect mainBar = new Rect(mainBackground.LeftPosition, mainBackground.TopPosition, mainBackground.Width, mainBackground.Height);
+		Rect mapBar = new Rect(mapBackground.LeftPosition, mapBackground.TopPosition, mapBackground.Width, mapBackground.Height);
+
+		Vector2 mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+
+		if(mainBar.Contains(mousePos) || mapBar.Contains(mousePos))
+		{
+			overGUI = true;
+		}
+		else
+		{
+			overGUI = false;
+		}
 		Raycaster();
 	}
 
@@ -63,61 +84,7 @@ public class Selector : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		//Does the RayCast Hit something?
-		if (Physics.Raycast(ray, out hit, 100))
-		{
-			//Is it the First Ever Hit?
-			if(previousHit.Length > 0)
-			{
-				string currentHit;
-
-				if(hit.collider.gameObject.transform.parent != null)
-				{
-					currentHit = hit.collider.gameObject.transform.parent.name;
-				}
-				else
-				{
-					currentHit = hit.collider.gameObject.transform.name;
-				}
-
-				if(lastHit.collider != null)
-				{
-					if(lastHit.collider.gameObject.transform.parent != null)
-					{
-						previousHit = lastHit.collider.gameObject.transform.parent.name;
-					}
-					else
-					{
-						previousHit = lastHit.collider.gameObject.transform.name;
-					}
-				}
-				else
-				{
-					previousHit = "DestroyedObject";
-					lastHit = hit;
-				}
-	
-
-				if(currentHit != previousHit)
-				{
-					hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
-					lastHit.collider.gameObject.SendMessageUpwards("CursorHover", false);
-				}
-				else
-				{
-					hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
-				}
-			}
-			else
-			{
-				hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
-				lastHit = hit;
-				previousHit = lastHit.collider.gameObject.transform.name;
-			}
-
-			lastHit = hit;
-			objectOver = hit.collider.gameObject;
-		}
-		else
+		if(overGUI)
 		{
 			try
 			{
@@ -126,6 +93,73 @@ public class Selector : MonoBehaviour
 			catch
 			{
 				return;
+			}
+		}
+		else
+		{
+			if (Physics.Raycast(ray, out hit, 100))
+			{
+				//Is it the First Ever Hit?
+				if(previousHit.Length > 0)
+				{
+					string currentHit;
+
+					if(hit.collider.gameObject.transform.parent != null)
+					{
+						currentHit = hit.collider.gameObject.transform.parent.name;
+					}
+					else
+					{
+						currentHit = hit.collider.gameObject.transform.name;
+					}
+
+					if(lastHit.collider != null)
+					{
+						if(lastHit.collider.gameObject.transform.parent != null)
+						{
+							previousHit = lastHit.collider.gameObject.transform.parent.name;
+						}
+						else
+						{
+							previousHit = lastHit.collider.gameObject.transform.name;
+						}
+					}
+					else
+					{
+						previousHit = "DestroyedObject";
+						lastHit = hit;
+					}
+
+					if(currentHit != previousHit)
+					{
+						hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
+						lastHit.collider.gameObject.SendMessageUpwards("CursorHover", false);
+					}
+					else
+					{
+						hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
+					}
+				}
+				else
+				{
+					hit.collider.gameObject.SendMessageUpwards("CursorHover", true);
+					lastHit = hit;
+					previousHit = lastHit.collider.gameObject.transform.name;
+				}
+
+				lastHit = hit;
+				objectOver = hit.collider.gameObject;
+			}
+			else
+			{
+				try
+				{
+					lastHit.collider.gameObject.SendMessageUpwards("CursorHover", false);
+				}
+				catch
+				{
+					return;
+				}
 			}
 		}
 	}
@@ -171,6 +205,12 @@ public class Selector : MonoBehaviour
 	{
 		unitOver = selected;
 		unitHovering = true;
-		Debug.Log ("TEST");
+	}
+
+	public void SelectionDestroyed()
+	{
+		unit_Selected = false;
+		unitSelected = null;
+		lastSelected = null;
 	}
 }

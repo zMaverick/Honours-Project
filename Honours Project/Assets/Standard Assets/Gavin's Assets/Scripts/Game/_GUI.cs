@@ -138,8 +138,12 @@ public class _GUI : MonoBehaviour {
 			}
 			else if(selector.Unit_Selected)
 			{
-				selector.UnitSelected.SendMessage("Destroy", true);
-				Destroy(selector.UnitSelected);
+				if(selector.UnitSelected.tag != "Enemy")
+				{
+					selector.UnitSelected.SendMessage("Destroy", true);
+					Destroy(selector.UnitSelected);
+					selector.SelectionDestroyed();
+				}
 			}
 		}
 	}
@@ -190,8 +194,12 @@ public class _GUI : MonoBehaviour {
 		{
 			if(Input.GetKeyDown(KeyCode.Delete))
 			{
-				selector.UnitSelected.SendMessage("Destroy", true);
-				Destroy(selector.UnitSelected);
+				if(selector.UnitSelected.tag != "Enemy")
+				{
+					selector.UnitSelected.SendMessage("Destroy", true);
+					Destroy(selector.UnitSelected);
+					selector.SelectionDestroyed();
+				}
 			}
 
 			cancelText = "Delete";
