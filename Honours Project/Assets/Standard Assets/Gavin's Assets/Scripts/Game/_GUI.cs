@@ -55,10 +55,13 @@ public class _GUI : MonoBehaviour {
 
 					if(Input.GetMouseButtonDown(1))
 				   	{
-						spawnedUnit.SendMessage ("TileOver", tileOver.gameObject);
-						spawnedUnit.SendMessage ("Spawned", false);
-						tileOver.OccupyingUnit(spawnedUnit);
-						unitSpawned = false;
+						if(!selector.overGUI)
+						{
+							spawnedUnit.SendMessage ("TileOver", tileOver.gameObject);
+							spawnedUnit.SendMessage ("Spawned", false);
+							tileOver.OccupyingUnit(spawnedUnit);
+							unitSpawned = false;
+						}
 					}
 				}
 			}
@@ -68,10 +71,13 @@ public class _GUI : MonoBehaviour {
 				{
 					if(Input.GetMouseButtonDown(1))
 					{
-						spawnedUnit.SendMessage ("TileOver", tileOver.gameObject.transform.parent.gameObject);
-						spawnedUnit.SendMessage ("Spawned", false);
-						tileOver.OccupyingUnit(spawnedUnit);
-						unitSpawned = false;
+						if(!selector.overGUI)
+						{
+							spawnedUnit.SendMessage ("TileOver", tileOver.gameObject);
+							spawnedUnit.SendMessage ("Spawned", false);
+							tileOver.OccupyingUnit(spawnedUnit);
+							unitSpawned = false;
+						}
 					}
 				}
 			}

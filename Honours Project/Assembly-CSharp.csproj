@@ -111,21 +111,42 @@
      <Compile Include="Assets\Photon Unity Networking\UtilityScripts\SmoothSyncMovement.cs" />
      <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TestDontDestroyOnLoad.cs" />
      <Compile Include="Assets\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
+     <Compile Include="Assets\Spider\Scripts\Animation\Escape\DelayedDeactivation.cs" />
+     <Compile Include="Assets\Spider\Scripts\Animation\Escape\Eject.cs" />
+     <Compile Include="Assets\Spider\Scripts\Animation\Escape\TheGreatActivator.cs" />
+     <Compile Include="Assets\Spider\Scripts\Fx\GlowPlaneOrient.cs" />
+     <Compile Include="Assets\Spider\Scripts\Fx\ReflectionFx.cs" />
+     <Compile Include="Assets\Spider\Scripts\Misc\DemoControl.cs" />
+     <Compile Include="Assets\Spider\Scripts\Misc\GameOverGUI.cs" />
+     <Compile Include="Assets\Spider\Scripts\Misc\InitLevelManager.cs" />
+     <Compile Include="Assets\Spider\Standard assets\GameScore.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
+     <None Include="Assets\Shaders\Fx\ParticleAdditiveBlend.shader" />
      <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Shaders\Additive.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
+     <None Include="Assets\Spider\Resources\HeightDepthOfField.shader" />
+     <None Include="Assets\Spider\Resources\BlurPassesForDof.shader" />
      <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\Projector Multiply.shader" />
+     <None Include="Assets\Shaders\BackgroundAndCharacters\Fallback.shader" />
+     <None Include="Assets\Shaders\BackgroundAndCharacters\EnemySelfIlluminationReflective 1.shader" />
+     <None Include="Assets\Shaders\Fx\Multiply.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Shaders\Wireframe.shader" />
+     <None Include="Assets\Spider\Resources\ColoredNoise.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\dependencies.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
+     <None Include="Assets\Shaders\BackgroundAndCharacters\PlanarRealtimeReflection.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\_Example Scenes.txt" />
+     <None Include="Assets\Shaders\BackgroundAndCharacters\ReflectiveBackgroundPlanar.shader" />
+     <None Include="Assets\Shaders\BackgroundAndCharacters\EnemySelfIlluminationReflective.shader" />
+     <None Include="Assets\Spider\Resources\MobileBloom.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
+     <None Include="Assets\Shaders\Fx\ParticleAdditive.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Readme_upgrading.txt" />
      <None Include="Assets\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\Projector Light.shader" />
@@ -133,6 +154,7 @@
      <None Include="Assets\Photon Unity Networking\readme.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\JsonFx\License.txt" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\JsonFx\Readme.txt" />
+     <None Include="Assets\Shaders\Fx\ParticleBlend.shader" />
      <None Include="Assets\Standard Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\link.xml" />
      <None Include="Assets\Photon Unity Networking\changelog.txt" />
  <Reference Include="Photon3Unity3D">
@@ -148,6 +170,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{EBE7C808-B649-2E9F-F1C7-15E6217185C2}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{4C2C21A5-D747-CBBA-9E1E-A91423AB26F9}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

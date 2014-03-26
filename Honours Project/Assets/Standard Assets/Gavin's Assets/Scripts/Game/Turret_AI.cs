@@ -14,7 +14,7 @@ public class Turret_AI : MonoBehaviour {
 	private Quaternion defaultHeadRotation = Quaternion.identity;
 	private Quaternion defaultGunRotation = Quaternion.identity;
 	private Quaternion headForward;
-
+	private Quaternion gunForward;
 	private bool turretReset;
 
 	public TurretState currentState;
@@ -148,7 +148,7 @@ public class Turret_AI : MonoBehaviour {
 		{
 			gunTarget = enemyTarget.transform.position - gun.transform.position;
 			headTarget = enemyTarget.transform.position - head.transform.position;
-			gunTarget.x = 0;
+			//gunTarget.x = 0;
 			headTarget.y = 0;
 		}
 		catch
@@ -160,10 +160,11 @@ public class Turret_AI : MonoBehaviour {
 		Quaternion headLook = Quaternion.LookRotation (headTarget);
 
 
-		if (Quaternion.Angle (gunLook, Quaternion.identity) <= 30) 
+
+		if (Quaternion.Angle (gunLook, gunForward ) <= 30) 
 		{
 			gunLocked = true;
-			gun.transform.localRotation = gunLook;
+			gun.transform.rotation = gunLook;
 		} 
 		else 
 		{
@@ -199,8 +200,6 @@ public class Turret_AI : MonoBehaviour {
 		double currentTime = Time.time * 100;
 		RaycastHit target;
 
-		Debug.DrawRay(spawn.transform.position, spawn.transform.rotation * Vector3.forward);
-
 		if(Physics.Raycast (spawn.transform.position, spawn.transform.rotation * Vector3.forward, out target, 100.0f))
 	 	{
 			if(target.collider.tag == "Enemy")
@@ -233,6 +232,7 @@ public class Turret_AI : MonoBehaviour {
 			Selected(isSpawned);
 			currentState = TurretState.STOP;
 			headForward = head.transform.rotation;
+			gunForward = gun.transform.rotation;
 			turretActive = true;
 		}
 
@@ -241,8 +241,8 @@ public class Turret_AI : MonoBehaviour {
 	void TileOver(GameObject tileOn)
 	{
 		tileObject = tileOn;
-		locationX = tileObject.GetComponent<Tile>().X;
-		locationY = tileObject.GetComponent<Tile>().X;
+		locationX = tileOn.GetComponent<Tile>().X;
+		locationY = tileOn.GetComponent<Tile>().Y;
 	}
 
 	void Selected(bool isSelected)

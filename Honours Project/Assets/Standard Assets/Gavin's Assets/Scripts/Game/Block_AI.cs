@@ -68,8 +68,8 @@ public class Block_AI : MonoBehaviour {
 	void TileOver(GameObject tileOn)
 	{
 		tileObject = tileOn;
-		locationX = tileObject.GetComponent<Tile>().X;
-		locationY = tileObject.GetComponent<Tile>().X;
+		locationX = tileOn.GetComponent<Tile>().X;
+		locationY = tileOn.GetComponent<Tile>().Y;
 	}
 
 	public void Destroy(bool ifSpawned)

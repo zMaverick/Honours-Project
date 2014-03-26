@@ -94,7 +94,7 @@ public class Connect1C : Photon.MonoBehaviour
         //We still didn't join any room: create one
         if (PhotonNetwork.room == null){
             string roomName = "TestRoom"+Application.loadedLevelName;
-            PhotonNetwork.CreateRoom(roomName, true, true, 4);
+            PhotonNetwork.CreateRoom(roomName, true, true, 1);
         }
     }
     
