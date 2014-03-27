@@ -14,25 +14,17 @@ public class Connect1C : Photon.MonoBehaviour
 
     void Awake()
     {
-        PhotonNetwork.ConnectUsingSettings("1.0");
+		Connect();
     }
-
 
     void OnGUI()
     {
         //Check connection state..
         if (PhotonNetwork.connectionState == ConnectionState.Disconnected)
         {
+			Connect ();
             //We are currently disconnected
-            GUILayout.Label("Connection status: Disconnected");
-
-            GUILayout.BeginVertical();
-            if (GUILayout.Button("Connect"))
-            {
-                //Connect using the PUN wizard settings (Self-hosted server or Photon cloud)
-                PhotonNetwork.ConnectUsingSettings("1.0");
-            }
-            GUILayout.EndVertical();
+            GUILayout.Label("Connection status: Reconnecting");
         }
         else
         {
@@ -73,7 +65,10 @@ public class Connect1C : Photon.MonoBehaviour
         receivedRoomList = false;
     }
 
-   
+	void Connect()
+	{
+		PhotonNetwork.ConnectUsingSettings("1.0");
+	}
 
 
 
@@ -93,7 +88,7 @@ public class Connect1C : Photon.MonoBehaviour
         }
         //We still didn't join any room: create one
         if (PhotonNetwork.room == null){
-            string roomName = "TestRoom"+Application.loadedLevelName;
+			string roomName = "HPRoom"+PhotonNetwork.GetRoomList().Length+1;
             PhotonNetwork.CreateRoom(roomName, true, true, 1);
         }
     }

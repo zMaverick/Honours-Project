@@ -11,7 +11,7 @@ public class Enemy_Spawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-	
+		SpawnEnemy();
 	}
 	
 	// Update is called once per frame
@@ -21,11 +21,16 @@ public class Enemy_Spawner : MonoBehaviour {
 
 		if(currentTime - lastTime >= spawnTime)
 		{
-			currentEnemy = (GameObject)Instantiate(enemy, this.transform.position, this.transform.rotation);
-			currentEnemy.name = "Enemy "+count;
-			count++;
+			SpawnEnemy();
 			lastTime = currentTime;
 		}
 
+	}
+
+	void SpawnEnemy()
+	{
+		currentEnemy = (GameObject)Instantiate(enemy, this.transform.position, this.transform.rotation);
+		currentEnemy.name = "Enemy "+count;
+		count++;
 	}
 }

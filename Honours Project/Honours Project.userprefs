@@ -1,17 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\_Tutorial 1\Scripts\Connect1C.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\_Tutorial 2\C#\Tutorial_2A2.cs">
     <Files>
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\SpiderAnimation.js" Line="50" Column="33" />
-      <File FileName="Assets\Spider\Scripts\Movement\FreeMovementMotor.js" Line="28" Column="4" />
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Enemy_Animation.cs" Line="54" Column="3" />
-      <File FileName="Assets\Spider\Scripts\Movement\MovementMotor.js" Line="12" Column="29" />
-      <File FileName="Assets\Spider\Scripts\Movement\PlayerMoveController.js" Line="188" Column="26" />
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_AI.cs" Line="38" Column="28" />
       <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Enemy_AI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Enemy_Spawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_Bullet.cs" Line="32" Column="42" />
-      <File FileName="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\_Tutorial 1\Scripts\Connect1C.cs" Line="68" Column="19" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Enemy_Spawner.cs" Line="14" Column="16" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_Bullet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\_Tutorial 1\Scripts\Connect1C.cs" Line="33" Column="14" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Selector.cs" Line="187" Column="60" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\_GUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\World.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Gavin's Assets\Scripts\Game\Turret_AI.cs" Line="196" Column="3" />
+      <File FileName="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\_Tutorial 2\C#\Tutorial_2A2.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

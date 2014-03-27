@@ -103,7 +103,6 @@ public class Turret_AI : MonoBehaviour {
 				case TurretState.ATTACK:
 				{
 					Attack ();
-
 					break;
 				}
 			}
@@ -131,6 +130,7 @@ public class Turret_AI : MonoBehaviour {
 
 	void Scan()
 	{
+		//muzzleFlash.SetActive(false);
 		Vector3 tempHeadRotation = head.transform.localEulerAngles;
 		float angle = Mathf.LerpAngle(360.0f-scanAngle/2, scanAngle/2, Mathf.PingPong(Time.time / scanSpeed, 1.0f));
 		tempHeadRotation.y = angle;
@@ -140,7 +140,7 @@ public class Turret_AI : MonoBehaviour {
 	void Attack()
 	{
 		bool headLocked;
-		bool gunLocked;
+		bool gunLocked = false;
 		Vector3 gunTarget;
 		Vector3 headTarget;
 
@@ -153,6 +153,7 @@ public class Turret_AI : MonoBehaviour {
 		}
 		catch
 		{
+			currentState = TurretState.STOP;
 			return;
 		}
 
@@ -160,45 +161,57 @@ public class Turret_AI : MonoBehaviour {
 		Quaternion headLook = Quaternion.LookRotation (headTarget);
 
 
-
-		if (Quaternion.Angle (gunLook, gunForward ) <= 30) 
-		{
-			gunLocked = true;
-			gun.transform.rotation = gunLook;
-		} 
-		else 
-		{
-			gunLocked = false;
-		}
-
-		if(Quaternion.Angle (headLook, headForward) <= scanAngle/2) 
+		if(Quaternion.Angle(headLook, headForward) <= scanAngle/2)
 		{
 			headLocked = true;
 			head.transform.rotation = headLook;
+
+			if (Quaternion.Angle (gunLook, gunForward ) <= 45) 
+			{
+				gunLocked = true;
+				gun.transform.rotation = gunLook;
+			} 
+			else 
+			{
+				gunLocked = false;
+			}
+
+			Fire();
 		}
 		else
 		{
 			headLocked = false;
-		}
 
-		if(!headLocked && !gunLocked)
-		{
 			currentState = TurretState.STOP;
-		}
 
-		Fire();
+			if(!headLocked && !gunLocked)
+			{
+				currentState = TurretState.STOP;
+			}
+
+		}
 	}
 	
 	void Target(GameObject target)
 	{
-		currentState = TurretState.ATTACK;
 		enemyTarget = target;
+
+		Vector3 headTarget = enemyTarget.transform.position - head.transform.position;
+		Quaternion headLook = Quaternion.LookRotation (headTarget);
+				
+		if(Quaternion.Angle(headLook, headForward) <= scanAngle/2)
+		{
+			currentState = TurretState.ATTACK;
+		}
 	}
 
 	void Fire()
 	{
 		double currentTime = Time.time * 100;
 		RaycastHit target;
+
+		Debug.DrawLine(gunMain.transform.position, enemyTarget.transform.position, Color.red);
+		Debug.DrawRay(spawn.transform.position, spawn.transform.rotation * Vector3.forward, Color.green);
 
 		if(Physics.Raycast (spawn.transform.position, spawn.transform.rotation * Vector3.forward, out target, 100.0f))
 	 	{

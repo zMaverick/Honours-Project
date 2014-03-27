@@ -51,6 +51,7 @@ public class Selector : MonoBehaviour
 			{
 				if(Input.GetMouseButtonDown(0))
 				{
+					Debug.Log ("WORKS");
 					unitSelected = unitOver;
 					UnitSelection();
 				}
@@ -183,7 +184,7 @@ public class Selector : MonoBehaviour
 			}
 			else if(unitSelected == lastSelected)
 			{
-				if(unitSelected == objectOver)
+				if(unitSelected == objectOver.transform.root.gameObject)
 				{
 					Debug.Log ("Same Object Selected");
 					unitSelected.SendMessageUpwards("Selected", true);

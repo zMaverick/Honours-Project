@@ -17,6 +17,6 @@ public class World : MonoBehaviour {
 
 	void OnTriggerExit(Collider col)
 	{
-		Destroy(col.gameObject);
+		Destroy(col.transform.root.gameObject);
 	}
 }
