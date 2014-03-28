@@ -124,6 +124,11 @@ public class _GUI : MonoBehaviour {
 			}
 		}
 
+		if(GUI.Button(new Rect( buttonHolderLeft.LeftPosition, buttonHolderLeft.TopPosition + header, unitButtonHeight, unitButtonHeight),"Main Menu"))
+		{
+			Application.LoadLevel(0);
+		}
+
 		GUI.enabled = unitButtonsActive;
 
 		if(GUI.Button(new Rect((buttonHolderLeft.RightPosition - unitActionWidth), buttonHolderLeft.TopPosition + header, unitActionWidth, unitActionHeight), "Rotate"))

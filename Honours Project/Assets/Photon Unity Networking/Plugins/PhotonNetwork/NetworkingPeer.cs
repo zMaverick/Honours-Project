@@ -17,7 +17,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 /// Implements Photon LoadBalancing used in PUN.
 /// This class is used internally by PhotonNetwork and not intended as public API.
 /// </summary>
-internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
+public class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 {
     // game properties must be cached, because the game is created on the master and then "re-created" on the game server
     // both must use the same props for the game

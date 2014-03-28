@@ -34,7 +34,7 @@ public static class PhotonNetwork
     /// Photon peer class that implements LoadBalancing in PUN. 
     /// Primary use is internal (by PUN itself).
     /// </summary>
-    internal static readonly NetworkingPeer networkingPeer;
+    public static readonly NetworkingPeer networkingPeer;
 
     /// <summary>
     /// The maximum amount of assigned PhotonViews PER player (or scene). See the documentation on how to raise this limitation
