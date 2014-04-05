@@ -90,6 +90,7 @@ public class Tile : MonoBehaviour
 		occupier = occupierObject;
 		occupier.name = occupier.tag+" ("+x+"-"+y+")";
 		renderer.material.color = occupiedColour;
+		CloudCommunication();
 	}
 	
 	private GameObject FindNeighbors(int number)
@@ -185,5 +186,17 @@ public class Tile : MonoBehaviour
 		occupied = false;
 		occupier = null;
 		renderer.material.color = defaultColour;
+		CloudCommunication();
 	}
+
+	void CloudCommunication()
+	{
+		object[] message = new object[3];
+		message[0] = occupied;
+		message[1] = (int)x;
+		message[2] = (int)y;
+
+		GameObject.Find (".Game Properties").GetComponent<Login>().photon.SendRequest(2,1,message, false);
+	}
+
 }

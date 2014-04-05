@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour {
+public class Grid : MonoBehaviour 
+{
 
 	public int grid_Length;
 	public int grid_Width;

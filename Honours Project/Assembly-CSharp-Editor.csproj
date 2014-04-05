@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,28 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\AnimationLinkEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\AstarPathEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\AstarUpdateWindow.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\EditorGUIx.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\EditorUtilities.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\GraphEditors\GraphEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\GraphEditors\GridGeneratorEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\GraphEditors\NavMeshGeneratorEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\GraphEditors\PointGeneratorEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\GraphUpdateSceneEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\ModifierEditors\RaycastModifierEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\ModifierEditors\SmoothModifierEditor.cs" />
-     <Compile Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\SeekerEditor.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Demos\DemoHub\Editor\PunStartup.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Demos\PUNGuide_M2H\zSharedAssets\Editor\FixBuildSettings.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\AccountService.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonConverter.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonEditor.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewHandler.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewInspector.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewPrefabApply.cs" />
-     <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\ServerSettingsInspector.cs" />
      <Compile Include="Assets\Spider\Editor\CheckValidShaders.cs" />
      <Compile Include="Assets\Spider\Editor\CopyMoodBox.cs" />
      <Compile Include="Assets\Spider\Editor\CopyTransform.cs" />
@@ -77,12 +55,9 @@
      <Compile Include="Assets\Spider\Editor\TransformGroup.cs" />
      <Compile Include="Assets\Spider\Scripts\Editor\CleanProject.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Shaders\Fx\ParticleAdditiveBlend.shader" />
-     <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\Gavin&apos;s Assets\Shaders\Additive.shader" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
      <None Include="Assets\Spider\Resources\HeightDepthOfField.shader" />
      <None Include="Assets\Spider\Resources\BlurPassesForDof.shader" />
      <None Include="Assets\Plugins\release_history.txt" />
@@ -94,7 +69,6 @@
      <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\DiffuseAlwaysVisible.shader" />
      <None Include="Assets\Gavin&apos;s Assets\Shaders\Wireframe.shader" />
      <None Include="Assets\Spider\Resources\ColoredNoise.shader" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\dependencies.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\Shaders\BackgroundAndCharacters\PlanarRealtimeReflection.shader" />
      <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\_Example Scenes.txt" />
@@ -103,25 +77,8 @@
      <None Include="Assets\Spider\Resources\MobileBloom.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
      <None Include="Assets\Shaders\Fx\ParticleAdditive.shader" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Readme_upgrading.txt" />
-     <None Include="Assets\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
      <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\ExampleScenes\Materials\Projector Light.shader" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Readme.txt" />
-     <None Include="Assets\Photon Unity Networking\readme.txt" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\JsonFx\License.txt" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\JsonFx\Readme.txt" />
      <None Include="Assets\Shaders\Fx\ParticleBlend.shader" />
-     <None Include="Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\link.xml" />
-     <None Include="Assets\Photon Unity Networking\changelog.txt" />
- <Reference Include="Pathfinding.Ionic.Zip.Reduced">
- <HintPath>Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
- </Reference>
- <Reference Include="Pathfinding.JsonFx">
- <HintPath>Assets\Gavin&apos;s Assets\Pathfinding\AstarPathfindingProject\Plugins\JsonFx\Pathfinding.JsonFx.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>Assets\Photon Unity Networking\Editor\PhotonNetwork\Newtonsoft.Json.dll</HintPath>
- </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>Assets\Plugins\Photon3Unity3D.dll</HintPath>
  </Reference>

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Menu_GUI : MonoBehaviour {
 
@@ -42,12 +43,18 @@ public class Menu_GUI : MonoBehaviour {
 
 		if(GUI.Button(new Rect(buttonPosX, (screenHeight * 0.5f) - (buttonHeight/2) , buttonWidth, buttonHeight ), "Game 1"))
 		{
+			Properties.ServerAddress = "localhost:5055";
 			Properties.CloudAssisted = false;
+			GameObject.Find (".Game Properties").GetComponent<AdminPanel>().serverIP = Properties.ServerAddress;
+			GameObject.Find (".Game Properties").GetComponent<Login>().Connect();
 			Application.LoadLevel(1);
 		}
 		if(GUI.Button(new Rect(buttonPosX, (screenHeight * 0.625f) - (buttonHeight/2), buttonWidth, buttonHeight ), "Game 2"))
 		{
+			Properties.ServerAddress = "137.135.181.176:5055";
 			Properties.CloudAssisted = true;
+			GameObject.Find (".Game Properties").GetComponent<AdminPanel>().serverIP = Properties.ServerAddress;
+			GameObject.Find (".Game Properties").GetComponent<Login>().Connect();
 			Application.LoadLevel(1);
 		}
 

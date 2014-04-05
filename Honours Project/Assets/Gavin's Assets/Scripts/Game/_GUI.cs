@@ -28,6 +28,7 @@ public class _GUI : MonoBehaviour {
 	private Selector selector;
 	private Tile tileOver;
 	private string cancelText = "Cancel";
+	private bool adminToggle;
 
 	public bool UnitSpawning
 	{
@@ -36,6 +37,7 @@ public class _GUI : MonoBehaviour {
 	
 	void Start() 
 	{
+		adminToggle = Properties.AdminMode;
 		selector = this.GetComponent<Selector>();
 		screenHeight = Screen.height;
 		screenWidth = Screen.width;
@@ -128,6 +130,14 @@ public class _GUI : MonoBehaviour {
 		{
 			Application.LoadLevel(0);
 		}
+
+		GUI.Label(new Rect(buttonHolderLeft.CenterX - 54, buttonHolderLeft.CenterY - 25, 100, 25)," Enemy Kills: "+Properties.EnemiesKilled);
+		GUI.Label(new Rect(buttonHolderLeft.CenterX - 50, buttonHolderLeft.CenterY, 130, 25), "Enemies Passed: "+Properties.EnemiesPassed);
+
+		adminToggle = GUI.Toggle(new Rect(buttonHolderLeft.CenterX - 54, buttonHolderLeft.CenterY + 25, 100, 15), adminToggle, " Admin Mode");
+		
+		Properties.AdminMode = adminToggle;
+
 
 		GUI.enabled = unitButtonsActive;
 
